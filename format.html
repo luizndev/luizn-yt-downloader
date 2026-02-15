@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Conversor cookies.txt → .env</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #0f172a, #020617);
+        color: #e2e8f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1000px;
+        background: #020617;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+
+      label {
+        font-size: 14px;
+        color: #94a3b8;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 180px;
+        background: #0f172a;
+        color: #e2e8f0;
+        border: 1px solid #1e293b;
+        border-radius: 10px;
+        padding: 12px;
+        font-family: monospace;
+        resize: vertical;
+        margin-bottom: 15px;
+        outline: none;
+      }
+
+      textarea:focus {
+        border-color: #22c55e;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      button {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .convert {
+        background: #22c55e;
+        color: #020617;
+      }
+
+      .convert:hover {
+        background: #16a34a;
+      }
+
+      .copy {
+        background: #38bdf8;
+        color: #020617;
+      }
+
+      .copy:hover {
+        background: #0ea5e9;
+      }
+
+      .clear {
+        background: #ef4444;
+        color: white;
+      }
+
+      .clear:hover {
+        background: #dc2626;
+      }
+
+      .info {
+        margin-top: 10px;
+        font-size: 13px;
+        color: #94a3b8;
+        text-align: center;
+      }
+
+      @media (max-width: 600px) {
+        .buttons {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Conversor cookies.txt → .env</h1>
+
+      <label>📥 Cole o conteúdo do cookies.txt</label>
+      <textarea
+        id="input"
+        placeholder="# Netscape HTTP Cookie File..."
+      ></textarea>
+
+      <div class="buttons">
+        <button class="convert" onclick="convert()">Converter</button>
+        <button class="copy" onclick="copyOutput()">Copiar Resultado</button>
+        <button class="clear" onclick="clearFields()">Limpar</button>
+      </div>
+
+      <br />
+
+      <label>📤 Resultado pronto para o .env</label>
+      <textarea id="output" readonly></textarea>
+
+      <div class="info">
+        O resultado já estará formatado corretamente como:<br />
+        <strong>COOKIES_CONTENT="...."</strong>
+      </div>
+    </div>
+
+    <script>
+      function convert() {
+        let input = document.getElementById('input').value.trim();
+
+        if (!input) {
+          alert('Cole o conteúdo do cookies.txt primeiro.');
+          return;
+        }
+
+        // Remove possível "env " no início
+        input = input.replace(/^env\s*/i, '');
+
+        // Remove espaços extras no início/fim
+        input = input.trim();
+
+        // Converte quebras de linha para \n
+        const formatted = input.replace(/\r?\n/g, '\\n');
+
+        const result = `COOKIES_CONTENT="${formatted}"`;
+
+        document.getElementById('output').value = result;
+      }
+
+      function copyOutput() {
+        const output = document.getElementById('output');
+
+        if (!output.value) {
+          alert('Nada para copiar.');
+          return;
+        }
+
+        output.select();
+        document.execCommand('copy');
+        alert('Copiado para a área de transferência!');
+      }
+
+      function clearFields() {
+        document.getElementById('input').value = '';
+        document.getElementById('output').value = '';
+      }
+    </script>
+  </body>
+</html>
