@@ -22,6 +22,42 @@
 - **Tratamento de Erros**: Feedback claro para o cliente em caso de falhas.
 - **CORS Habilitado**: Configurado para aceitar requisições de qualquer origem (`*`).
 
+## Autenticação (Anti-Bloqueio YouTube)
+
+O YouTube bloqueia frequentemente IPs de datacenter (como Square Cloud). Para evitar o erro "Sign in to confirm you’re not a bot", siga um dos métodos abaixo:
+
+**Opção 1: Arquivo `cookies.txt` (Recomendado para Local e Deploy Simples)**
+
+1. Instale a extensão "Get cookies.txt LOCALLY" ([Chrome](https://chrome.google.com/webstore/detail/get-cookiestxt-locally/cclelndahbckbenkjhflccgompcgegod) ou [Firefox](https://addons.mozilla.org/en-US/firefox/addon/get-cookies-txt-locally/)) no seu navegador e logue no YouTube.
+2. Exporte os cookies e salve o arquivo como `cookies.txt` na raiz do projeto.
+
+**Opção 2: Variável de Ambiente `COOKIES_CONTENT` (Recomendado para Cloud)**
+
+1. Copie o conteúdo do seu `cookies.txt`.
+2. Crie uma variável de ambiente chamada `COOKIES_CONTENT` no painel da sua hospedagem.
+3. Cole o conteúdo do arquivo como valor desta variável.
+
+**Formato Esperado (Netscape HTTP Cookie File):**
+
+```
+# Netscape HTTP Cookie File
+.youtube.com	TRUE	/	FALSE	1708112345	PREF	f1=50000000
+.youtube.com	TRUE	/	TRUE	1708112345	VISITOR_INFO1_LIVE	A1b2C3d4E5f
+...
+```
+
+_(Basta abrir o `cookies.txt` com o Bloco de Notas e copiar tudo)_.
+
+### ⚠️ Validade e Renovação
+
+Os cookies **não têm validade fixa**, mas expiram imediatamente se você:
+
+- Sair da conta (Logout).
+- Mudar a senha.
+- O YouTube invalidar por segurança.
+
+**Geralmente, duram de 3 a 12 meses.** Se o erro "Sign in" voltar a aparecer, basta repetir o processo e atualizar o `COOKIES_CONTENT`.
+
 ## Tecnologias
 
 - [NestJS](https://nestjs.com/) - Framework Node.js progressivo.

@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import * as path from 'path';
 import * as os from 'os';
+import * as fs from 'fs';
 import ffmpegPath from 'ffmpeg-static';
 import ytDlp from 'yt-dlp-exec';
 
@@ -18,20 +19,42 @@ export class DownloadService {
 
     this.logger.log(`Starting download for ${videoId} in ${format} format`);
 
+
+    let cookiesPath = path.join(process.cwd(), 'cookies.txt');
+    
+    if (process.env.COOKIES_CONTENT) {
+      const tempCookiesPath = path.join(os.tmpdir(), 'youtube_cookies.txt');
+      fs.writeFileSync(tempCookiesPath, process.env.COOKIES_CONTENT);
+      cookiesPath = tempCookiesPath;
+    }
+
+    const hasCookies = fs.existsSync(cookiesPath);
+
+    const baseOptions: any = {
+      output: outputPath,
+      ffmpegLocation: path.dirname(ffmpegPath as any),
+      noCheckCertificates: true,
+      noWarnings: true,
+      preferFreeFormats: true,
+      addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
+    };
+
+    if (hasCookies) {
+      baseOptions.cookies = cookiesPath;
+    }
+
     try {
       if (format === 'mp3') {
         await ytDlp(url, {
+          ...baseOptions,
           extractAudio: true,
           audioFormat: 'mp3',
-          output: outputPath,
-          ffmpegLocation: path.dirname(ffmpegPath as any),
         });
       } else {
         await ytDlp(url, {
+          ...baseOptions,
           format: 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
           mergeOutputFormat: 'mp4',
-          output: outputPath,
-          ffmpegLocation: path.dirname(ffmpegPath as any),
         });
       }
 
