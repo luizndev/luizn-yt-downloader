@@ -44,12 +44,12 @@ export class DownloadService {
     const hasCookies = fs.existsSync(cookiesPath);
     this.logger.log(`Cookies detected: ${hasCookies} | Path: ${cookiesPath}`);
 
+
     const baseOptions: any = {
       output: outputPath,
-      ffmpegLocation: ffmpegPath,
+      ffmpegLocation: path.dirname(ffmpegPath as any),
       noCheckCertificates: true,
       noWarnings: true,
-      preferFreeFormats: true,
       cookies: hasCookies ? cookiesPath : undefined,
     };
 
@@ -59,6 +59,7 @@ export class DownloadService {
           ...baseOptions,
           extractAudio: true,
           audioFormat: 'mp3',
+          format: 'bestaudio/best',
         });
       } else {
         await ytDlp(url, {
