@@ -19,6 +19,7 @@ Um serviço robusto e escalável para download de vídeos do YouTube, construíd
 - **Arquitetura Modular**: Separação clara de responsabilidades (Service, Controller, Module).
 - **Validação de Dados**: Uso de DTOs e `class-validator` para garantir requests seguros.
 - **Tratamento de Erros**: Feedback claro para o cliente em caso de falhas.
+- **CORS Habilitado**: Configurado para aceitar requisições de qualquer origem (`*`).
 
 ## Tecnologias
 
@@ -49,7 +50,10 @@ npm run start
 # Desenvolvimento (Watch Mode)
 npm run start:dev
 
-# Produção
+# Produção (Auto Build + Start)
+npm run auto
+
+# Produção (Manual)
 npm run build
 npm run start:prod
 ```
