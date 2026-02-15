@@ -1,98 +1,130 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="http://luizndev.com.br/" target="blank"><img src="https://i.imgur.com/jw52rJ2.png" width="200" alt="Luizn Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<h1 align="center">Luizn YT Downloader</h1>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Um serviço robusto e escalável para download de vídeos do YouTube, construído com **NestJS**.
 
-## Description
+<div align="center">
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)
 
-## Project setup
+</div>
 
-```bash
-$ npm install
-```
+## Funcionalidades
 
-## Compile and run the project
+- **Download de Áudio (MP3)**: Extração de áudio em alta qualidade.
+- **Download de Vídeo (MP4)**: Baixe vídeos completos com áudio.
+- **Arquitetura Modular**: Separação clara de responsabilidades (Service, Controller, Module).
+- **Validação de Dados**: Uso de DTOs e `class-validator` para garantir requests seguros.
+- **Tratamento de Erros**: Feedback claro para o cliente em caso de falhas.
+
+## Tecnologias
+
+- [NestJS](https://nestjs.com/) - Framework Node.js progressivo.
+- [TypeScript](https://www.typescriptlang.org/) - Superset tipado de JavaScript.
+- [yt-dlp-exec](https://github.com/microlinkhq/yt-dlp-exec) - Wrapper para o poderoso `yt-dlp`.
+- [ffmpeg-static](https://github.com/eugeneware/ffmpeg-static) - Binários estáticos do FFmpeg para processamento de mídia.
+
+## Instalação
 
 ```bash
-# development
-$ npm run start
+# Clone o repositório
+git clone https://github.com/luizndev/luizn-yt-downloader.git
 
-# watch mode
-$ npm run start:dev
+# Entre na pasta
+cd luizn-yt-downloader
 
-# production mode
-$ npm run start:prod
+# Instale as dependências
+npm install
 ```
 
-## Run tests
+## Executando a Aplicação
 
 ```bash
-# unit tests
-$ npm run test
+# Desenvolvimento
+npm run start
 
-# e2e tests
-$ npm run test:e2e
+# Desenvolvimento (Watch Mode)
+npm run start:dev
 
-# test coverage
-$ npm run test:cov
+# Produção
+npm run build
+npm run start:prod
 ```
 
-## Deployment
+A API estará disponível em `http://localhost:3000`.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Documentação da API
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Baixar Mídia
+
+Endpoint para baixar vídeos ou áudios do YouTube.
+
+**URL:** `/download/:videoId`
+**Método:** `GET`
+
+#### Parâmetros de URL
+
+| Parâmetro | Tipo     | Descrição                                  |
+| :-------- | :------- | :----------------------------------------- |
+| `videoId` | `string` | **Obrigatório**. O ID do vídeo do YouTube. |
+
+#### Query Parameters
+
+| Parâmetro | Tipo     | Padrão | Descrição                         |
+| :-------- | :------- | :----- | :-------------------------------- |
+| `format`  | `string` | `mp3`  | Formato desejado: `mp3` ou `mp4`. |
+
+### Exemplos de Uso
+
+#### 1. Baixar MP3 (Padrão)
+
+```http
+GET http://localhost:3000/download/jNQXAC9IVRw
+```
+
+_Ou explicitamente:_
+
+```http
+GET http://localhost:3000/download/jNQXAC9IVRw?format=mp3
+```
+
+#### 2. Baixar MP4
+
+```http
+GET http://localhost:3000/download/jNQXAC9IVRw?format=mp4
+```
+
+### Exemplo via cURL
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Baixar MP3 e salvar como arquivo
+curl -OJ "http://localhost:3000/download/jNQXAC9IVRw?format=mp3"
+
+# Baixar MP4 e salvar como arquivo
+curl -OJ "http://localhost:3000/download/jNQXAC9IVRw?format=mp4"
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## Estrutura do Projeto
 
-## Resources
+```
+src/
+├── download/
+│   ├── dto/
+│   │   └── download-query.dto.ts  # Validação de entrada
+│   ├── download.controller.ts     # Rotas e HTTP
+│   ├── download.module.ts         # Injeção de dependência
+│   └── download.service.ts        # Lógica de negócio (yt-dlp)
+├── app.module.ts                  # Módulo raiz
+└── main.ts                        # Ponto de entrada (Configuração global)
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+## Licença
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Este projeto está sob a licença [UNLICENSED](LICENSE).
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Desenvolvido com ❤️ por **LuiznDev**.
