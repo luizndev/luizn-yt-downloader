@@ -1,7 +1,14 @@
 
 > luizn-yt-downloader@0.0.1 auto
-> npm run build && npm run start:prod
+> npm install && npm run build && npm run start:prod
 
+
+up to date, audited 725 packages in 3s
+
+145 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
 
 > luizn-yt-downloader@0.0.1 build
 > npx nest build
@@ -10,11 +17,33 @@
 > luizn-yt-downloader@0.0.1 start:prod
 > node dist/main
 
-[32m[Nest] 39628  - [39m15/02/2026, 16:58:48 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
-[32m[Nest] 39628  - [39m15/02/2026, 16:58:48 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +13ms[39m
-[32m[Nest] 39628  - [39m15/02/2026, 16:58:48 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDownloadModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 39628  - [39m15/02/2026, 16:58:48 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +59ms[39m
-[32m[Nest] 39628  - [39m15/02/2026, 16:58:48 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +4ms[39m
-[32m[Nest] 39628  - [39m15/02/2026, 16:58:48 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mDownloadController {/download}:[39m[38;5;3m +0ms[39m
-[32m[Nest] 39628  - [39m15/02/2026, 16:58:48 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/download/:videoId, GET} route[39m[38;5;3m +2ms[39m
-[32m[Nest] 39628  - [39m15/02/2026, 16:58:48 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +2ms[39m
+[32m[Nest] 41160  - [39m15/02/2026, 17:07:35 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 41160  - [39m15/02/2026, 17:07:35 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +14ms[39m
+[32m[Nest] 41160  - [39m15/02/2026, 17:07:35 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDownloadModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 41160  - [39m15/02/2026, 17:07:35 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +57ms[39m
+[32m[Nest] 41160  - [39m15/02/2026, 17:07:35 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +5ms[39m
+[32m[Nest] 41160  - [39m15/02/2026, 17:07:35 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mDownloadController {/download}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 41160  - [39m15/02/2026, 17:07:35 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/download/:videoId, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 41160  - [39m15/02/2026, 17:07:35 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +3ms[39m
+[31m[Nest] 41160  - [39m15/02/2026, 17:07:35 [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3000[39m[38;5;3m +2ms[39m
+node:net:1940
+    const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+               ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at ExpressAdapter.listen (F:\api-download\node_modules\@nestjs\platform-express\adapters\express-adapter.js:127:32)
+    at F:\api-download\node_modules\@nestjs\core\nest-application.js:188:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (F:\api-download\node_modules\@nestjs\core\nest-application.js:178:16)
+    at async bootstrap (F:\api-download\dist\main.js:14:5) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v22.22.0
