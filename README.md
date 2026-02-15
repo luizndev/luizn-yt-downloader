@@ -4,8 +4,9 @@
 
 <h1 align="center">Luizn YT Downloader</h1>
 
-Um serviço robusto e escalável para download de vídeos do YouTube, construído com **NestJS**.
-
+<p align="center">
+  Um serviço robusto e escalável para download de vídeos do YouTube, construído com **NestJS**.
+</p>
 <div align="center">
 
 ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)
