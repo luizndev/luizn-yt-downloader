@@ -19,7 +19,7 @@ export class DownloadController {
       query.format,
     );
 
-    res.download(filePath, `${videoId}.${query.format}`, (err) => {
+    res.download(filePath, `${videoId}.${query.format}`, (err: any) => {
       if (err) {
         console.error('Error sending file:', err);
       }
