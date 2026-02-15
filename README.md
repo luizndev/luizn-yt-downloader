@@ -48,7 +48,7 @@ O YouTube bloqueia frequentemente IPs de datacenter (como Square Cloud). Para ev
 
 _(Basta abrir o `cookies.txt` com o Bloco de Notas e copiar tudo)_.
 
-### ⚠️ Validade e Renovação
+### Validade e Renovação
 
 Os cookies **não têm validade fixa**, mas expiram imediatamente se você:
 
